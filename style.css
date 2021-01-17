@@ -7,6 +7,8 @@ html {
 body, html {
     margin: 0;
     padding: 0;
+    height: auto;
+    width: auto;
 }
 
 #wrapper {
@@ -59,6 +61,9 @@ body, html {
     border-radius: 40px;
     color: white;
     align-items: center;
+    box-shadow: 5px 5px 0px 4px #7d7d80,
+                12px 12px 0px 1px black;
+    margin-bottom: 10px;
 }
 
 #outputWrap{
@@ -90,7 +95,6 @@ body, html {
     grid-gap: 25px;
     padding: 30px;
     grid-template-columns: repeat(4, 20fr);
-
 }
 
 .btn{
@@ -103,7 +107,7 @@ body, html {
     font-size: 220%;
     font-weight: bolder;
     outline: none;
-    box-shadow: 5px 5px 3px 1px #7d7d80;
+    box-shadow: 5px 5px 0px 1px #7d7d80;
 }
 
 .btn:hover{
@@ -146,9 +150,11 @@ body, html {
     outline: none;
     box-shadow: 5px 5px 3px 1px #7d7d80;
 }
+
 .btn3:hover{
    transform: scale(1.03);
 }
+
 .btn3:active{
     transform: scale(.97);
 }
@@ -160,6 +166,7 @@ body, html {
     font-family: 'Courier New', Courier, monospace;
     padding: 5px;
 }
+
 #signature{
     padding-right: 15px;
 }
