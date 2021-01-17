@@ -109,6 +109,7 @@ function inputValue(event){
         case 'decimalBtn':
             console.log("somehow, I have to make a decimal insert here..yikes");
             break;
+
         case 'resultBtn':
             console.log("and finally, hit the equals button to get your results");
             break;
@@ -116,3 +117,4 @@ function inputValue(event){
 }
 
 //event listeners
+//add event
