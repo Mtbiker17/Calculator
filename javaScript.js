@@ -30,7 +30,7 @@ function divide(input1, input2){
 let displayArray = [];
 function displayInput(buttonValue){
     displayArray.push(buttonValue);
-    calcInput.textContent = `${displayArray.join("")} `;
+    calcInput.textContent = `${displayArray.join("")}`;
     console.log(displayArray);
 }
 
