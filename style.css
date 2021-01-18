@@ -47,6 +47,7 @@ body, html {
     display: flex;
     align-items: center;
     flex-direction: column;
+
 }
 
 #calcWrap{
@@ -57,13 +58,13 @@ body, html {
     width: 565px;
     background-color: rgb(0, 0, 0);
     padding: 30px;
-    border-width: 5px;
+    border: 2px solid white;
     border-radius: 40px;
     color: white;
     align-items: center;
     box-shadow: 5px 5px 0px 4px #7d7d80,
                 12px 12px 0px 1px black;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 #outputWrap{

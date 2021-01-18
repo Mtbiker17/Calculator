@@ -27,6 +27,18 @@ function divide(input1, input2){
     console.log(answer);
 }
 
+let displayArray = [];
+function displayInput(buttonValue){
+    displayArray.push(buttonValue);
+    calcInput.textContent = `${displayArray.join("")} `;
+    console.log(displayArray);
+}
+
+function allClear(){
+    calcInput.textContent = "0";
+    calcResult.textContent = "0";
+}
+
 //operate calculator based on entered operand
 function operate(operator, input1, input2){
     if (operator === '+') {
@@ -45,8 +57,7 @@ operate('*', 12, 4);
 function inputValue(event){
     switch (event.target.id){
         case 'allClearBtn':
-            calcInput.textContent = "0";
-            calcResult.textContent = "0";
+            allClear();
             break;
         case 'deleteBtn':
             console.log("try to make things delete here");
@@ -54,65 +65,85 @@ function inputValue(event){
         case 'percentBtn':
             console.log("make percent button here? maybe?");
             break;
-        case 'divideBtn':
-            console.log("this will divide things, hopefully...");
+        case 'divideBtn': {
+            let buttonValue = " / ";
+            displayInput(buttonValue);
             break;
-        case 'sevenBtn':
-            let seven = 7;
-            console.log(seven);
+        }
+        case 'sevenBtn': {
+            let buttonValue = 7;
+            displayInput(buttonValue);
             break;
-        case 'eightBtn':
-            let eight = 8;
-            console.log(eight);
+        }
+        case 'eightBtn': {
+            let buttonValue = 8;
+            displayInput(buttonValue);
             break;
-        case 'nineBtn':
-            let nine = 9;
-            console.log(nine);
+        }
+        case 'nineBtn':{
+            let buttonValue = 9;
+            displayInput(buttonValue);
             break;
-        case 'addBtn':
-            console.log("this will add, in a perfect world");
+        }
+        case 'addBtn': { 
+            let buttonValue = " + ";
+            displayInput(buttonValue);
             break;
-        case 'fourBtn':
-            let four = 4;
-            console.log(four);
+        }
+        case 'fourBtn': {
+            let buttonValue = 4;
+            displayInput(buttonValue);
             break;
-        case 'fiveBtn':
-            let five = 5;
-            console.log(five);
+        }
+        case 'fiveBtn': { 
+            let buttonValue = 5;
+            displayInput(buttonValue);
             break;
-        case 'sixBtn':
-            let six = 6;
-            console.log(six);
+        }
+        case 'sixBtn': {
+            let buttonValue = 6;
+            displayInput(buttonValue);
             break;
-        case 'subtractBtn':
-            console.log("lets try to subtract here");
+        }
+        case 'subtractBtn': {
+            let buttonValue = " - ";
+            displayInput(buttonValue);
             break;
-        case 'oneBtn':
-            let one = 1;
-            console.log(one);
+        }
+        case 'oneBtn': {
+            let buttonValue = 1;
+            displayInput(buttonValue);
             break;
-        case 'twoBtn':
-            let two = 2;
-            console.log(two);
+        }
+        case 'twoBtn': {
+            let buttonValue = 2;
+            displayInput(buttonValue);
             break;
-        case 'threeBtn':
-            let three = 3;
-            console.log(three);
+        }
+        case 'threeBtn': {
+            let buttonValue = 3;
+            displayInput(buttonValue);
             break;
-        case 'multiplyBtn':
-            console.log("yes, multiply!");
+        }
+        case 'multiplyBtn': {
+            let buttonValue = " * ";
+            displayInput(buttonValue);
             break;
-        case 'zeroBtn':
-            let zero = 0;
-            console.log(zero);
+        }
+        case 'zeroBtn': {
+            let buttonValue = 0;
+            displayInput(buttonValue);
             break;
-        case 'decimalBtn':
-            console.log("somehow, I have to make a decimal insert here..yikes");
+        }
+        case 'decimalBtn': {
+            let buttonValue = ".";
+            displayInput(buttonValue);
             break;
-
-        case 'resultBtn':
+        }
+        case 'resultBtn': {
             console.log("and finally, hit the equals button to get your results");
             break;
+        }
     }
 }
 
