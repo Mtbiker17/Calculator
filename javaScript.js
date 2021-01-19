@@ -1,151 +1,81 @@
 const calcInput = document.querySelector('#calcInput');
 const calcResult = document.querySelector('#calcResult');
-const allClearBtn = document.getElementById('allClearBtn');
-const deleteBtn = document.getElementById('deleteBtn');
+const deleteBtn = document.querySelector('[data-delete]');
+const numberButtons = document.querySelectorAll('[data-number]');
+const operatorButtons = document.querySelectorAll('[data-operators]')
+const clearButton = document.querySelector('[data-allClear]');
+let firstOperand = '';
+let secondOperand = '';
 
-const buttons = document.querySelectorAll('button');
-buttons.forEach(inputClick => inputClick.addEventListener('click', inputValue));
-
-
-function add (input1, input2){
-    let answer = input1 + input2;
+function add (a, b){
+    let answer = a + b;
     console.log(answer);
 }
 
-function subtract(input1, input2){
-    let answer = input1 - input2;
+function subtract(a, b){
+    let answer = a - b;
     console.log(answer);
 }
 
-function multiply(input1, input2){
-    let answer = input1 * input2;
+function multiply(a, b){
+    let answer = a * b;
     console.log(answer);
 }
 
-function divide(input1, input2){
-    let answer = input1 / input2;
+function divide(a, b){
+    let answer = a / b;
     console.log(answer);
-}
-
-let displayArray = [];
-function displayInput(buttonValue){
-    displayArray.push(buttonValue);
-    calcInput.textContent = `${displayArray.join("")}`;
-    console.log(displayArray);
-}
-
-function allClear(){
-    calcInput.textContent = "0";
-    calcResult.textContent = "0";
 }
 
 //operate calculator based on entered operand
-function operate(operator, input1, input2){
+function operate(operator, a, b){
     if (operator === '+') {
-       add(input1, input2);
+       add(a, b);
     } else if (operator === '-') {
-       subtract(input1, input2);
+       subtract(a, b);
     } else if (operator === '*') {
-        multiply(input1, input2);
+        multiply(a, b);
     } else if (operator === '/') {
-        divide(input1, input2);
+        divide(a, b);
     }
 }
-operate('*', 12, 4);
 
-//store and display input value on button 'click' event
-function inputValue(event){
-    switch (event.target.id){
-        case 'allClearBtn':
-            allClear();
-            break;
-        case 'deleteBtn':
-            console.log("try to make things delete here");
-            break;
-        case 'percentBtn':
-            console.log("make percent button here? maybe?");
-            break;
-        case 'divideBtn': {
-            let buttonValue = " / ";
-            displayInput(buttonValue);
-            break;
-        }
-        case 'sevenBtn': {
-            let buttonValue = 7;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'eightBtn': {
-            let buttonValue = 8;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'nineBtn':{
-            let buttonValue = 9;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'addBtn': { 
-            let buttonValue = " + ";
-            displayInput(buttonValue);
-            break;
-        }
-        case 'fourBtn': {
-            let buttonValue = 4;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'fiveBtn': { 
-            let buttonValue = 5;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'sixBtn': {
-            let buttonValue = 6;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'subtractBtn': {
-            let buttonValue = " - ";
-            displayInput(buttonValue);
-            break;
-        }
-        case 'oneBtn': {
-            let buttonValue = 1;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'twoBtn': {
-            let buttonValue = 2;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'threeBtn': {
-            let buttonValue = 3;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'multiplyBtn': {
-            let buttonValue = " * ";
-            displayInput(buttonValue);
-            break;
-        }
-        case 'zeroBtn': {
-            let buttonValue = 0;
-            displayInput(buttonValue);
-            break;
-        }
-        case 'decimalBtn': {
-            let buttonValue = ".";
-            displayInput(buttonValue);
-            break;
-        }
-        case 'resultBtn': {
-            console.log("and finally, hit the equals button to get your results");
-            break;
-        }
+function display(number){
+    if(calcInput.textContent === "0"){
+        clearDisplay();
     }
+    if(calcInput.textContent.length === 34){
+        alert("Sorry, You've reached the limit of integers");
+        return;
+    } 
+    calcInput.textContent += number;
+    console.log(calcInput.textContent);
+}
+
+function clearDisplay(){
+    calcInput.textContent = "";
+}
+
+function resetScreen(){
+    calcInput.textContent = 0;
+    calcResult.textContent = 0;
+}
+
+function removeLast() {
+    calcInput.textContent = calcInput.textContent.toString().slice(0, -1);
+    console.log(calcInput.textContent);
 }
 
 //event listeners
-//add event
+
+numberButtons.forEach((button) => 
+button.addEventListener('click', () => display(button.textContent))
+);
+
+operatorButtons.forEach((button) => 
+button.addEventListener('click', () => display(button.textContent))
+);
+
+clearButton.addEventListener('click', resetScreen);
+
+deleteBtn.addEventListener('click', removeLast);
