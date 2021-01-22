@@ -1,30 +1,22 @@
-const calcInput = document.querySelector('#calcInput');
-const calcResult = document.querySelector('#calcResult');
+let calcInput = document.querySelector('#calcInput');
 const deleteBtn = document.querySelector('[data-delete]');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operatorButtons = document.querySelectorAll('[data-operators]')
-const clearButton = document.querySelector('[data-allClear]');
-let firstOperand = '';
-let secondOperand = '';
+const allClear = document.querySelector('[data-allClear]');
+const result = document.querySelector('[data-result]');
+const buttons = document.querySelectorAll('button');
 
 function add (a, b){
-    let answer = a + b;
-    console.log(answer);
+    calcInput.textContent = +a + +b;
 }
-
 function subtract(a, b){
-    let answer = a - b;
-    console.log(answer);
+    calcInput.textContent = a - b;
 }
-
 function multiply(a, b){
-    let answer = a * b;
-    console.log(answer);
+    calcInput.textContent = a * b;
 }
-
 function divide(a, b){
-    let answer = a / b;
-    console.log(answer);
+    calcInput.textContent = a / b;
 }
 
 //operate calculator based on entered operand
@@ -33,11 +25,24 @@ function operate(operator, a, b){
        add(a, b);
     } else if (operator === '-') {
        subtract(a, b);
-    } else if (operator === '*') {
+    } else if (operator === 'x') {
         multiply(a, b);
     } else if (operator === '/') {
         divide(a, b);
     }
+    console.log(operator, a, b);
+}
+
+function getOperation(){
+    if(calcInput.textContent === "0") return;
+    getOperator(operator);
+    let a = calcInput.textContent;
+    let b = 2;
+    operate(operator, a, b);
+}
+
+function getOperator(operatorValue){
+    operator = operatorValue;
 }
 
 function display(number){
@@ -49,7 +54,6 @@ function display(number){
         return;
     } 
     calcInput.textContent += number;
-    console.log(calcInput.textContent);
 }
 
 function clearDisplay(){
@@ -58,24 +62,27 @@ function clearDisplay(){
 
 function resetScreen(){
     calcInput.textContent = 0;
-    calcResult.textContent = 0;
 }
 
 function removeLast() {
     calcInput.textContent = calcInput.textContent.toString().slice(0, -1);
-    console.log(calcInput.textContent);
+        if(calcInput.textContent === ""){
+            calcInput.textContent = 0;
+        }
 }
 
 //event listeners
-
 numberButtons.forEach((button) => 
 button.addEventListener('click', () => display(button.textContent))
 );
 
 operatorButtons.forEach((button) => 
-button.addEventListener('click', () => display(button.textContent))
+button.addEventListener('click', () => getOperator(button.textContent))
 );
 
-clearButton.addEventListener('click', resetScreen);
+operatorButtons.forEach((button) =>
+button.addEventListener('click', getOperation));
+
+allClear.addEventListener('click', resetScreen);
 
 deleteBtn.addEventListener('click', removeLast);
