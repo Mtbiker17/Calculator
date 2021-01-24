@@ -6,6 +6,7 @@ const allClear = document.querySelector('[data-allClear]');
 const result = document.querySelector('[data-result]');
 const buttons = document.querySelectorAll('button');
 
+
 function add (a, b){
     calcInput.textContent = +a + +b;
 }
@@ -20,7 +21,7 @@ function divide(a, b){
 }
 
 //operate calculator based on entered operand
-function operate(operator, a, b){
+function operate(a, operator, b){
     if (operator === '+') {
        add(a, b);
     } else if (operator === '-') {
@@ -30,38 +31,50 @@ function operate(operator, a, b){
     } else if (operator === '/') {
         divide(a, b);
     }
-    console.log(operator, a, b);
+    console.log(a, operator);
 }
 
 function getOperation(){
     if(calcInput.textContent === "0") return;
+    a = calcInput.textContent;
     getOperator(operator);
-    let a = calcInput.textContent;
-    let b = 2;
-    operate(operator, a, b);
+    clearDisplay();
+    calcInput.textContent = "0";
+    console.log(a, operator);
 }
 
-function getOperator(operatorValue){
-    operator = operatorValue;
+function evaluate(){
+    b = calcInput.textContent;
+    operate(a, operator, b);
+}
+
+function getOperator(buttonContent){
+    operator = buttonContent;
 }
 
 function display(number){
     if(calcInput.textContent === "0"){
         clearDisplay();
-    }
+    };
     if(calcInput.textContent.length === 34){
         alert("Sorry, You've reached the limit of integers");
         return;
-    } 
-    calcInput.textContent += number;
-}
+    } else {
+        calcInput.textContent += number;
+    };
+};
 
 function clearDisplay(){
     calcInput.textContent = "";
+
 }
 
 function resetScreen(){
     calcInput.textContent = 0;
+    a = 0
+    b = 0
+    operator = "";
+    console.log(a, operator, b);
 }
 
 function removeLast() {
@@ -82,6 +95,8 @@ button.addEventListener('click', () => getOperator(button.textContent))
 
 operatorButtons.forEach((button) =>
 button.addEventListener('click', getOperation));
+
+result.addEventListener('click', evaluate);
 
 allClear.addEventListener('click', resetScreen);
 
