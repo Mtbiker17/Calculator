@@ -17,7 +17,7 @@ body, html {
     width: 100%;
 }
 
-#header{
+#header {
     text-align: center;
     font-size: 300%;
     font-family: 'Orbitron', sans-serif;
@@ -38,7 +38,7 @@ body, html {
     height: 80px;
     width: 100%;
     color: white;
-    text-shadow: 11px 8px 2px black;
+    text-shadow: 8px 5px 2px black;
     letter-spacing: 15px;
     margin: 5px
 }
@@ -49,7 +49,7 @@ body, html {
     flex-direction: column;
 }
 
-#calcWrap{
+#calcWrap {
     font-family: 'Orbitron', sans-serif;
     display: flex;
     flex-direction: column;
@@ -62,10 +62,10 @@ body, html {
     align-items: center;
     box-shadow: 5px 5px 0px 4px #7d7d80,
                 12px 12px 0px 1px black;
-    margin-bottom: 16px; 
+    margin-bottom: 16px;
 }
 
-#outputWrap{
+#outputWrap {
     font-size: 190%;
     font-family: monospace;
     text-align: right;
@@ -99,10 +99,10 @@ body, html {
     grid-template-columns: repeat(4, 20fr);
 }
 
-.btn{
+.btn {
     height: 90px;
     width:90px;
-    border-radius: 50%;
+    border-radius: 10%;
     border: 0;
     background-color: white;
     font-family: monospace;
@@ -112,14 +112,14 @@ body, html {
     box-shadow: 5px 5px 0px 1px #7d7d80;
 }
 
-.btn:hover{
+.btn:hover {
    transform: scale(1.03);
 }
-.btn:active{
+.btn:active {
     transform: scale(.97);
 }
 
-.btn2{
+.btn2 {
     height: 80px;
     width: 105px;
     border-radius: 10%;
@@ -132,14 +132,14 @@ body, html {
     box-shadow: 5px 5px 3px 1px #7d7d80;
 }
 
-.btn2:hover{
+.btn2:hover {
     transform: scale(1.03);
  }
- .btn2:active{
+ .btn2:active {
     transform: scale(.97);
  }
 
-.btn3{
+.btn3 {
     height: 80px;
     width: 235px;
     border-radius: 20px;
@@ -153,15 +153,15 @@ body, html {
     box-shadow: 5px 5px 3px 1px #7d7d80;
 }
 
-.btn3:hover{
+.btn3:hover {
    transform: scale(1.03);
 }
 
-.btn3:active{
+.btn3:active {
     transform: scale(.97);
 }
 
-#footer{
+#footer {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -169,6 +169,6 @@ body, html {
     padding: 5px;
 }
 
-#signature{
+#signature {
     padding-right: 15px;
 }
