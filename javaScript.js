@@ -6,7 +6,9 @@ const allClear = document.querySelector('[data-allClear]');
 const result = document.querySelector('[data-result]');
 const exponentBtn = document.querySelector('[data-exponent]');
 const decimalBtn = document.querySelector('[data-decimal]');
-
+let a = "";
+let b = "";
+let operationArray = [];
 
 function add (a, b) {
     answer = +(+a + +b).toFixed(20);
@@ -51,22 +53,38 @@ function operate(a, operator, b) {
     console.log(a, operator, b);
 };
 
+
 function getOperation() {
     if(calcInput.textContent === "0") return;
+    console.log(operator)
+    if (operationArray.includes(operator)){
+        operationArray = [];
+        console.log("it went here");
+        a = calcResult.textContent;
+        operationArray.push(a, operator);
+        b = calcInput.textContent
+        operate(a, operator, b);
+        resetInput();
+
+    } else {
+    console.log("it went else")
     a = calcInput.textContent;
     getOperator(operator);
-    calcInput.textContent = "0";
+    operationArray.push(a, operator);
     calcResult.textContent = a;
-    console.log(a, operator);
+    resetInput();
+    console.log(operationArray)
+    }
 };
 
-function evaluate() {
-    b = calcInput.textContent;
-    operate(a, operator, b);
-    calcResult.textContent = answer;
-    resetInput();
-    calcInput.textContent = 0;
-};
+function evaluate(){
+        a = calcResult.textContent;
+        operator = operationArray[1];
+        operationArray.push(a, operator);
+        b = calcInput.textContent
+        operate(a, operator, b);
+        resetInput();
+}
 
 function getOperator(buttonContent) {
     operator = buttonContent;
@@ -88,10 +106,9 @@ function display(number){
     if (calcInput.textContent.length === 34) {
         alert("Sorry, You've reached the limit of integers");
         return;
-    } else {
+    } else
         calcInput.textContent += number;
     }
-};
 
 function addDecimal() {
     if (calcInput.textContent.includes(".")){
@@ -107,17 +124,18 @@ function clearDisplay() {
 
 function resetInput() {
     calcInput.textContent = 0;
-    a = answer;
-    b = 0
+    a = 0;
+    b = calcResult.textContent
     operator = "";
 };
 
 function resetAll() {
     calcInput.textContent = 0
-    calcResult.textContent = 0
+    calcResult.textContent = "0"
     a = 0;
     b = 0
     operator = "";
+    operationArray = [];
 };
 
 function removeLast() {
@@ -132,8 +150,7 @@ button.addEventListener('click', () => display(button.textContent))
 );
 
 operatorButtons.forEach((button) => 
-button.addEventListener('click', () => getOperator(button.textContent))
-);
+button.addEventListener('click', () => getOperator(button.textContent)));
 
 operatorButtons.forEach((button) =>
 button.addEventListener('click', getOperation));
