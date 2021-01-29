@@ -2,41 +2,41 @@ let calcInput = document.querySelector('#calcInput');
 const deleteBtn = document.querySelector('[data-delete]');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operatorButtons = document.querySelectorAll('[data-operators]')
-const allClear = document.querySelector('[data-allClear]');
-const result = document.querySelector('[data-result]');
+const allClearButton = document.querySelector('[data-allClear]');
+const equalsButton = document.querySelector('[data-result]');
 const exponentBtn = document.querySelector('[data-exponent]');
 const decimalBtn = document.querySelector('[data-decimal]');
 let a = "";
 let b = "";
-let operationArray = [];
+let operator = "";
 
-function add (a, b) {
-    answer = +(+a + +b).toFixed(20);
+function add(a, b) {
+    answer = +(+b + +a).toFixed(10);
     calcResult.textContent = answer;
 };
 
 function subtract(a, b) {
-    answer = +(a - b).toFixed(20);
+    answer = +(b - a).toFixed(10);
     calcResult.textContent = answer;
 };
 
 function multiply(a, b) {
-    answer = +(a * b).toFixed(20);
+    answer = +(b * a).toFixed(10);
     calcResult.textContent = answer;
 };
 
 function divide(a, b) {
-    answer = +(a / b).toFixed(20);
+    answer = +(b / a).toFixed(10);
     calcResult.textContent = answer;
 };
 
-function power(a, b) {
-    answer = +Math.pow(a, b).toFixed(20);
+function power(base, a) {
+    answer = +Math.pow(base, a).toFixed(10);
     calcResult.textContent = answer;
 };
 
 function operate(a, operator, b) {
-    if (b === "0" && operator === '/') {
+    if (a === "0" && operator === '/') {
         alert("You can't divide by zero");
         resetAll();
     } else if (operator === '+') {
@@ -48,70 +48,71 @@ function operate(a, operator, b) {
     } else if (operator === '/') {
         divide(a, b);
     } else if (operator === 'pow'){
-        power(a, b);
+        power(base, a);
     }
-    console.log(a, operator, b);
+    console.log(b, operator, a);
+};
+function getFirstOperand() {
+    a = calcInput.textContent;
+    console.log(`a = ${a}`);
 };
 
-
-function getOperation() {
-    if(calcInput.textContent === "0") return;
-    console.log(operator)
-    if (operationArray.includes(operator)){
-        operationArray = [];
-        console.log("it went here");
-        a = calcResult.textContent;
-        operationArray.push(a, operator);
-        b = calcInput.textContent
-        operate(a, operator, b);
-        resetInput();
-
+function checkEval() {
+    if (operator == "") {
+       a = calcInput.textContent;
+       calcResult.textContent = a;
     } else {
-    console.log("it went else")
-    a = calcInput.textContent;
-    getOperator(operator);
-    operationArray.push(a, operator);
-    calcResult.textContent = a;
+       a = calcInput.textContent;
+       b = calcResult.textContent;
+       operate(a, operator, b);
+   }
+};
+
+function getOperator(buttonContent) {
+    checkEval();
+    operator = buttonContent;
     resetInput();
-    console.log(operationArray)
-    }
+    console.log(`operator = ${operator}`);
 };
 
 function evaluate(){
-        a = calcResult.textContent;
-        operator = operationArray[1];
-        operationArray.push(a, operator);
-        b = calcInput.textContent
-        operate(a, operator, b);
-        resetInput();
-}
-
-function getOperator(buttonContent) {
-    operator = buttonContent;
+    if(operator === "pow"){
+        a = calcInput.textContent;
+        operate(a, operator, base);
+    } else {
+      a = calcInput.textContent;
+      b = calcResult.textContent;
+      operate(a, operator, b);
+    }
+    resetInput();
 };
 
 function exponent() {
-    a = calcInput.textContent;
+    if (calcInput.textContent === "0"){
+        calcResult.textContent = "You must enter base number first";
+    } else {
+    base = calcInput.textContent;
+    console.log("base =", base);
     calcResult.textContent = "Enter exponent"
-    calcInput.textContent = 0;
-    b = calcInput.textContent;
+    resetInput();
     operator = "pow"
-    operate();
+    }
 };
 
-function display(number){
+function displayScreen(number){
     if (calcInput.textContent === "0") {
         clearDisplay();
     }
     if (calcInput.textContent.length === 34) {
         alert("Sorry, You've reached the limit of integers");
         return;
-    } else
+    } else {
         calcInput.textContent += number;
     }
+ };
 
 function addDecimal() {
-    if (calcInput.textContent.includes(".")){
+    if (calcInput.textContent.includes(".")) {
         return;
     } else {
         calcInput.textContent += ".";
@@ -124,42 +125,40 @@ function clearDisplay() {
 
 function resetInput() {
     calcInput.textContent = 0;
-    a = 0;
-    b = calcResult.textContent
-    operator = "";
 };
 
 function resetAll() {
-    calcInput.textContent = 0
-    calcResult.textContent = "0"
+    calcInput.textContent = 0;
+    calcResult.textContent = 0;
     a = 0;
-    b = 0
+    b = 0;
     operator = "";
-    operationArray = [];
 };
 
 function removeLast() {
     calcInput.textContent = calcInput.textContent.toString().slice(0, -1);
+    a = calcInput.textContent;
+    console.log(`a = ${a}`);
         if(calcInput.textContent === "") {
             calcInput.textContent = 0;
         }
 };
 
 numberButtons.forEach((button) => 
-button.addEventListener('click', () => display(button.textContent))
+button.addEventListener('click', () => displayScreen(button.textContent))
 );
+
+numberButtons.forEach((button) => 
+button.addEventListener('click', () => getFirstOperand()));
 
 operatorButtons.forEach((button) => 
 button.addEventListener('click', () => getOperator(button.textContent)));
 
-operatorButtons.forEach((button) =>
-button.addEventListener('click', getOperation));
-
 decimalBtn.addEventListener('click', addDecimal);
 
-result.addEventListener('click', evaluate);
+equalsButton.addEventListener('click', evaluate);
 
-allClear.addEventListener('click', resetAll);
+allClearButton.addEventListener('click', resetAll);
 
 deleteBtn.addEventListener('click', removeLast);
 
