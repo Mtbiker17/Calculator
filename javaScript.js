@@ -1,10 +1,10 @@
 let calcInput = document.querySelector('#calcInput');
-const deleteBtn = document.querySelector('[data-delete]');
+const deleteButton = document.getElementById('deleteButton');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operatorButtons = document.querySelectorAll('[data-operators]')
-const allClearButton = document.querySelector('[data-allClear]');
-const equalsButton = document.querySelector('[data-result]');
-const exponentBtn = document.querySelector('[data-exponent]');
+const allClearButton = document.getElementById('allClear');
+const equalsButton = document.getElementById('equalsButton');
+const exponentButton = document.getElementById('exponentButton');
 let a = "";
 let b = "";
 let operator = "";
@@ -20,7 +20,7 @@ function subtract(a, b) {
 };
 
 function multiply(a, b) {
-    answer = +(b * a).toFixed(10);
+    answer = +(a * b).toFixed(10);
     calcResult.textContent = answer;
 };
 
@@ -42,7 +42,7 @@ function operate(a, operator, b) {
        add(a, b);
     } else if (operator === '-') {
        subtract(a, b);
-    } else if (operator === 'x') {
+    } else if (operator === 'x' || operator === "*") {
         multiply(a, b);
     } else if (operator === '/') {
         divide(a, b);
@@ -56,12 +56,11 @@ function getFirstOperand() {
     parseInt(a);
     if(isNaN(a)){
         alert("You can only have one decimal in the number");
-        resetInput();
+        removeLastInput();
     }
-    console.log(`a = ${a}`);
 };
 
-function checkEval() {
+function getOperator(buttonContent) {
     if (operator == "") {
        a = calcInput.textContent;
        calcResult.textContent = a;
@@ -70,13 +69,8 @@ function checkEval() {
        b = calcResult.textContent;
        operate(a, operator, b);
    }
-};
-
-function getOperator(buttonContent) {
-    checkEval();
     operator = buttonContent;
     resetInput();
-    console.log(`operator = ${operator}`);
 };
 
 function evaluate(){
@@ -131,7 +125,7 @@ function resetAll() {
     operator = "";
 };
 
-function removeLast() {
+function removeLastInput() {
     calcInput.textContent = calcInput.textContent.toString().slice(0, -1);
     a = calcInput.textContent;
     console.log(`a = ${a}`);
@@ -141,19 +135,39 @@ function removeLast() {
 };
 
 numberButtons.forEach((button) => 
-button.addEventListener('click', () => displayScreen(button.textContent))
-);
+button.addEventListener('click', () => displayScreen(button.textContent)));
 
-numberButtons.forEach((button) => 
-button.addEventListener('click', () => getFirstOperand()));
+numberButtons.forEach((button) => button.addEventListener('click', () => getFirstOperand()));
 
-operatorButtons.forEach((button) => 
-button.addEventListener('click', () => getOperator(button.textContent)));
+operatorButtons.forEach((button) => button.addEventListener('click', () => getOperator(button.textContent)));
 
 equalsButton.addEventListener('click', evaluate);
 
 allClearButton.addEventListener('click', resetAll);
 
-deleteBtn.addEventListener('click', removeLast);
+deleteButton.addEventListener('click', removeLastInput);
 
-exponentBtn.addEventListener('click', exponent)
+exponentButton.addEventListener('click', exponent);
+
+//key functionality
+window.addEventListener('keydown', function(e) {
+    keyInput(e.key);
+});
+
+function keyInput(key) {
+    if(key === "Backspace") {
+        removeLastInput();
+    };
+    if(key === "Enter" || key === "=") {
+        evaluate();
+    };
+    if(key === "1" || key === "2" || key === "3" || key === "4" || key === "5" ||
+        key === "6" || key === "7" || key === "8" || key === "9" || key === "0") {
+            displayScreen(key);
+    };
+    if(key === "+" || key === "-" || key === "/" || key === "*") {
+        getOperator(key);
+    } else {
+        return;
+    }
+};
