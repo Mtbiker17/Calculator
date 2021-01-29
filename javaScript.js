@@ -5,7 +5,6 @@ const operatorButtons = document.querySelectorAll('[data-operators]')
 const allClearButton = document.querySelector('[data-allClear]');
 const equalsButton = document.querySelector('[data-result]');
 const exponentBtn = document.querySelector('[data-exponent]');
-const decimalBtn = document.querySelector('[data-decimal]');
 let a = "";
 let b = "";
 let operator = "";
@@ -54,6 +53,11 @@ function operate(a, operator, b) {
 };
 function getFirstOperand() {
     a = calcInput.textContent;
+    parseInt(a);
+    if(isNaN(a)){
+        alert("You can only have one decimal in the number");
+        resetInput();
+    }
     console.log(`a = ${a}`);
 };
 
@@ -111,14 +115,6 @@ function displayScreen(number){
     }
  };
 
-function addDecimal() {
-    if (calcInput.textContent.includes(".")) {
-        return;
-    } else {
-        calcInput.textContent += ".";
-    }
-};
-
 function clearDisplay() {
     calcInput.textContent = "";
 };
@@ -153,8 +149,6 @@ button.addEventListener('click', () => getFirstOperand()));
 
 operatorButtons.forEach((button) => 
 button.addEventListener('click', () => getOperator(button.textContent)));
-
-decimalBtn.addEventListener('click', addDecimal);
 
 equalsButton.addEventListener('click', evaluate);
 
