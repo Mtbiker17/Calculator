@@ -42,7 +42,7 @@ function operate(a, operator, b) {
        add(a, b);
     } else if (operator === '-') {
        subtract(a, b);
-    } else if (operator === 'x' || operator === "*") {
+    } else if (operator === 'x' || operator === '*') {
         multiply(a, b);
     } else if (operator === '/') {
         divide(a, b);
@@ -61,6 +61,14 @@ function getFirstOperand() {
 };
 
 function getOperator(buttonContent) {
+    console.log("operator =", operator)
+    if(buttonContent === "x" && calcInput.textContent === "0"){
+        a = calcResult.textContent;
+        b = calcInput.textContent;
+        add(a, b);
+        operator = "x";
+        return;
+    }
     if (operator == "") {
        a = calcInput.textContent;
        calcResult.textContent = a;
@@ -74,6 +82,7 @@ function getOperator(buttonContent) {
 };
 
 function evaluate(){
+    getOperator();
     if(operator === "pow"){
         a = calcInput.textContent;
         operate(a, operator, base);
@@ -81,8 +90,10 @@ function evaluate(){
       a = calcInput.textContent;
       b = calcResult.textContent;
       operate(a, operator, b);
+      
     }
     resetInput();
+    
 };
 
 function exponent() {
@@ -164,9 +175,7 @@ function keyInput(key) {
     if(key === "1" || key === "2" || key === "3" || key === "4" || key === "5" ||
         key === "6" || key === "7" || key === "8" || key === "9" || key === "0") {
             displayScreen(key);
-    };
-    if(key === "+" || key === "-" || key === "/" || key === "*") {
-        getOperator(key);
+
     } else {
         return;
     }
