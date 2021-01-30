@@ -93,7 +93,6 @@ function evaluate(){
       
     }
     resetInput();
-    
 };
 
 function exponent() {
