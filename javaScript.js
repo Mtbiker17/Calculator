@@ -168,14 +168,13 @@ window.addEventListener('keydown', function(e) {
 function keyInput(key) {
     if(key === "Backspace") {
         removeLastInput();
-    };
+    }
     if(key === "Enter" || key === "=") {
         evaluate();
-    };
+    }
     if(key === "1" || key === "2" || key === "3" || key === "4" || key === "5" ||
         key === "6" || key === "7" || key === "8" || key === "9" || key === "0") {
             displayScreen(key);
-
     } else {
         return;
     }
