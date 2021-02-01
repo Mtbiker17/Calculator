@@ -53,6 +53,10 @@ function operate(a, operator, b) {
 
 function getOperand() {
     a = calcInput.textContent;
+    if(a === "."){
+        calcInput.textContent = "0.";
+        return;
+    }
     parseInt(a);
     if(isNaN(a)){
         alert("You can only have one decimal in the number");
