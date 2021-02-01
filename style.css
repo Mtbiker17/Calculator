@@ -60,8 +60,6 @@ body, html {
     border-radius: 40px;
     color: white;
     align-items: center;
-    box-shadow: 5px 5px 0px 4px #7d7d80,
-                12px 12px 0px 1px black;
     margin-bottom: 16px;
 }
 
