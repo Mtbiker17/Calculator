@@ -49,9 +49,9 @@ function operate(a, operator, b) {
     } else if (operator === 'pow'){
         power(base, a);
     }
-    console.log(b, operator, a);
 };
-function getFirstOperand() {
+
+function getOperand() {
     a = calcInput.textContent;
     parseInt(a);
     if(isNaN(a)){
@@ -61,7 +61,6 @@ function getFirstOperand() {
 };
 
 function getOperator(buttonContent) {
-    console.log("operator =", operator)
     if(buttonContent === "x" && calcInput.textContent === "0"){
         a = calcResult.textContent;
         b = calcInput.textContent;
@@ -79,6 +78,7 @@ function getOperator(buttonContent) {
    }
     operator = buttonContent;
     resetInput();
+    console.log(typeof(operator));
 };
 
 function evaluate(){
@@ -90,9 +90,9 @@ function evaluate(){
       a = calcInput.textContent;
       b = calcResult.textContent;
       operate(a, operator, b);
-      
     }
     resetInput();
+    console.log(a, operator, b)
 };
 
 function exponent() {
@@ -100,7 +100,6 @@ function exponent() {
         calcResult.textContent = "You must enter base number first";
     } else {
     base = calcInput.textContent;
-    console.log("base =", base);
     calcResult.textContent = "Enter exponent"
     resetInput();
     operator = "pow"
@@ -130,15 +129,14 @@ function resetInput() {
 function resetAll() {
     calcInput.textContent = 0;
     calcResult.textContent = 0;
-    a = 0;
-    b = 0;
+    a = "";
+    b = "";
     operator = "";
 };
 
 function removeLastInput() {
     calcInput.textContent = calcInput.textContent.toString().slice(0, -1);
     a = calcInput.textContent;
-    console.log(`a = ${a}`);
         if(calcInput.textContent === "") {
             calcInput.textContent = 0;
         }
@@ -147,7 +145,7 @@ function removeLastInput() {
 numberButtons.forEach((button) => 
 button.addEventListener('click', () => displayScreen(button.textContent)));
 
-numberButtons.forEach((button) => button.addEventListener('click', () => getFirstOperand()));
+numberButtons.forEach((button) => button.addEventListener('click', () => getOperand()));
 
 operatorButtons.forEach((button) => button.addEventListener('click', () => getOperator(button.textContent)));
 
@@ -168,13 +166,20 @@ function keyInput(key) {
     if(key === "Backspace") {
         removeLastInput();
     }
-    if(key === "Enter" || key === "=") {
-        evaluate();
-    }
     if(key === "1" || key === "2" || key === "3" || key === "4" || key === "5" ||
-        key === "6" || key === "7" || key === "8" || key === "9" || key === "0") {
+       key === "6" || key === "7" || key === "8" || key === "9" || key === "0") {
+            parseInt(key);
             displayScreen(key);
-    } else {
+    }
+    if(key === "."){
+        displayScreen(key);
+        parseInt(calcInput.textContent);
+        if(isNaN(calcInput.textContent)) {
+            alert("You can only have one decimal in the number");
+            removeLastInput();
+        }
+    }
+    else {
         return;
     }
 };
