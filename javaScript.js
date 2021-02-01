@@ -177,13 +177,8 @@ function keyInput(key) {
     }
     if(key === "."){
         displayScreen(key);
-        parseInt(calcInput.textContent);
-        if(isNaN(calcInput.textContent)) {
-            alert("You can only have one decimal in the number");
-            removeLastInput();
-        }
-    }
-    else {
+        getOperand();
+    } else {
         return;
     }
 };
