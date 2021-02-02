@@ -82,7 +82,6 @@ function getOperator(buttonContent) {
    }
     operator = buttonContent;
     resetInput();
-    console.log(typeof(operator));
 };
 
 function evaluate(){
@@ -174,6 +173,15 @@ function keyInput(key) {
        key === "6" || key === "7" || key === "8" || key === "9" || key === "0") {
             parseInt(key);
             displayScreen(key);
+    }
+    if(key === "Enter" || key === "="){
+        evaluate();
+    }
+    if(key === "+" || key === "-" || key === "/" || key === "*"){
+        if(key === "*"){
+            key === "x";
+        }
+        getOperator(key);
     }
     if(key === "."){
         displayScreen(key);
